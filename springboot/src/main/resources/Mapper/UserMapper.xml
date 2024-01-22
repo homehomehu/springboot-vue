@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springboot.mapper.UserMapper">
-    <select id="listAll" resultType="com.example.springboot.entity.User">
-        select * from user;
-    </select>
-</mapper>
 
-        <!-- 这是一个典型的MyBatis映射文件（Mapper XML）的片段，用于定义与数据库表 "user" 相关的操作。-->
-<!--   <select> 元素定义了一个查询操作，其中的 id 属性指定了这个操作的唯一标识符，
-这个标识符需要与 UserMapper 接口中的方法名相匹配。
-在这个例子中，listall 是映射文件中查询操作的唯一标识符。（注意，因为大小写敏感，所以写成listAll是无法标识成功的哦-->
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.springboot.entity.User">
+        <id column="id" property="id" />
+        <result column="no" property="no" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <result column="age" property="age" />
+        <result column="sex" property="sex" />
+        <result column="phone" property="phone" />
+        <result column="role_id" property="roleId" />
+        <result column="isValid" property="isvalid" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <!-- 这种定义的目的是为了在其他地方引用这个 SQL 片段，以避免在多个地方重复编写相同的列名列表。-->
+    <sql id="Base_Column_List">
+        id, no, name, password, age, sex, phone, role_id, isValid
+    </sql>
+
+    <select id="pageC" resultType="com.example.springboot.entity.User">
+        select * from user
+        <!-- 此处不能有“;”，因为完整的SQL语句后面有个LIMIT来限制查询结果的行数（也就是你那个PageSize) -->
+    </select>
+
+</mapper>

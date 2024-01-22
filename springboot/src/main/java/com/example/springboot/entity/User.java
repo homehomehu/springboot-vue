@@ -1,15 +1,54 @@
 package com.example.springboot.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author jiajiajia
+ * @since 2023-12-14
+ */
 @Data
-public class User {
-    private int id;
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value="User对象", description="")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "主键")  // value：对属性的简单描述
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    @ApiModelProperty(value = "账号")
     private String no;
+
+    @ApiModelProperty(value = "名字")
     private String name;
+
+    @ApiModelProperty(value = "密码")
     private String password;
-    private int sex;
-    private int roleId; // 因为原本在数据库里的字段就是role_id，所以这里可以直接大写
+
+    private Integer age;
+
+    @ApiModelProperty(value = "性别")
+    private Integer sex;
+
+    @ApiModelProperty(value = "电话")
     private String phone;
-    private String isvalid; // 原本在数据库里面的字段是isValid,如果这里我们写成isValid，会被认为在数据库里的是is_valid，所以会报错！
+
+    @ApiModelProperty(value = "⻆⾊ 0超级管理员，1管理员，2普通账号")
+    private Integer roleId;
+
+    @ApiModelProperty(value = "是否有效，Y有效，其他⽆效")
+    @TableField("isValid")
+    private String isvalid;
 }

@@ -1,12 +1,20 @@
 package com.example.springboot.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.springboot.entity.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
-
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author jiajiajia
+ * @since 2023-12-14
+ */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-    List<User> listAll();
+
+    IPage pageC(IPage<User> page);
 }
